@@ -18,20 +18,22 @@ Member::Member(): followers(0), following(0)
 
 void Member::follow(Member& member)
 {
-	if(!this->myMemberFollow.empty()){
-		int i =findIndex(myMemberFollow,member);
-		if(i ==-1){
+	if(this->idMember != member.idMember){
+		if(!this->myMemberFollow.empty()){
+			int i =findIndex(myMemberFollow,member);
+			if(i ==-1){
+				this->following++;
+				member.followers++;
+				this->myMemberFollow.push_back(&member);
+				member.myMemberFollower.push_back(this);
+			}
+		}
+		else{
 			this->following++;
 			member.followers++;
 			this->myMemberFollow.push_back(&member);
 			member.myMemberFollower.push_back(this);
 		}
-	}
-	else{
-		this->following++;
-		member.followers++;
-		this->myMemberFollow.push_back(&member);
-		member.myMemberFollower.push_back(this);
 	}
 }
 
